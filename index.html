@@ -116,7 +116,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   background: conic-gradient(from 0deg at 38% 55%,#162614 0deg,#2E4D2A 40deg,#5C7A5E 85deg,#3A5C3A 125deg,#0A1410 175deg,#1A2E1A 215deg,#E8631A 250deg,#2A3A28 280deg,#4A6E48 318deg,#162614 360deg);
   filter: blur(52px);
   animation: heroCW 32s linear infinite;
-  opacity: .92;
+  opacity: .72;
   will-change: transform;
 }
 .hero-bg::after {
@@ -126,7 +126,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   background: conic-gradient(from 180deg at 62% 40%,#0A1410 0deg,#E8631A 28deg,#2E3D2F 70deg,#4A6E4A 115deg,#0A1410 165deg,#5C7A5E 205deg,#1A2A1A 252deg,#3A5030 298deg,#0A1410 360deg);
   filter: blur(68px);
   animation: heroCCW 24s linear infinite;
-  opacity: .76;
+  opacity: .55;
   will-change: transform;
 }
 @keyframes heroCW  { from{transform:rotate(0deg)}   to{transform:rotate(360deg)} }
@@ -172,7 +172,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   line-height: 0.94;
   letter-spacing: 0.01em;
   color: #fff;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2rem;
   margin-left: 0;
   max-width: 14ch;
 }
@@ -183,7 +183,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   line-height: 1.6;
   color: rgba(255,255,255,0.65);
   max-width: 36ch;
-  margin-bottom: 2.8rem;
+  margin-bottom: 3.5rem;
 }
 .hero-btns {
   display: flex;
@@ -346,7 +346,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
 .stat {
   position: relative;
   overflow: hidden;
-  padding: clamp(4rem,7vw,7rem) clamp(1.5rem,3vw,3rem);
+  padding: clamp(2.5rem,4.5vw,4.5rem) clamp(1.5rem,3vw,3rem);
   background: transparent;
   border: none;
 }
@@ -415,8 +415,8 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
 .stat-num sup { font-size: 0.32em; font-family: 'DM Mono', monospace; }
 .stat-label {
   font-family: 'DM Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.18em;
+  font-size: 0.48rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #7A7A6A;
   margin-top: 0.8rem;
@@ -463,7 +463,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 
 /* ── OFFER ── */
-.offer-section { background: var(--dark); color: #fff; padding: 0 !important; }
+.offer-section { background: var(--dark); color: #fff; padding: 0 !important; border-top: 1px solid rgba(255,255,255,0.04); }
 .offer-header {
   position: relative;
   z-index: 2;
@@ -495,10 +495,10 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   inset: 0;
   background:
     linear-gradient(to bottom,
-      rgba(10,20,16,0.35) 0%,
-      rgba(46,61,47,0.10) 30%,
-      rgba(46,61,47,0.10) 70%,
-      rgba(10,20,16,0.5) 100%);
+      rgba(10,20,16,0.55) 0%,
+      rgba(10,20,16,0.35) 30%,
+      rgba(10,20,16,0.35) 70%,
+      rgba(10,20,16,0.65) 100%);
   z-index: 1;
 }
 
@@ -521,12 +521,12 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   padding-left: clamp(1.25rem,5vw,3rem);
 }
 .offer-card-v:last-child { border-right: none; }
-.offer-card-v:hover { background: rgba(255,255,255,0.04); }
+.offer-card-v:hover { background: rgba(255,255,255,0.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); }
 
 .offer-card-icon {
-  width: 54px;
-  height: 54px;
-  margin-bottom: 2.4rem;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 2.8rem;
   color: #fff;
   opacity: 0.92;
   flex-shrink: 0;
@@ -537,7 +537,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   letter-spacing: 0.22em;
   color: rgba(255,255,255,0.35);
   display: block;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 .offer-card-v h3 {
   font-weight: 300;
@@ -654,10 +654,10 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(10,20,16,0.3) 0%,
-    rgba(46,61,47,0.15) 40%,
-    rgba(10,20,16,0.55) 100%
+    to right,
+    rgba(10,20,16,0.85) 0%,
+    rgba(10,20,16,0.75) 45%,
+    rgba(10,20,16,0.4) 100%
   );
   z-index: 1;
 }
@@ -677,7 +677,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 .how-steps { display: flex; flex-direction: column; }
 .how-step {
-  padding: 2rem 0;
+  padding: 2.5rem 0;
   border-top: 1px solid rgba(255,255,255,0.1);
   display: grid;
   grid-template-columns: 3rem 1fr;
@@ -866,7 +866,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 .press-card:hover { box-shadow: 0 4px 24px rgba(28,28,28,0.08); }
 .press-card-visual {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
   overflow: hidden;
   background: #1e2e22;
   flex-shrink: 0;
@@ -880,7 +880,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 .press-card:hover .press-card-visual svg { transform: scale(1.03); }
 .press-card-text {
-  padding: 1.4rem 1.6rem 1.6rem;
+  padding: 1.2rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -897,8 +897,8 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 .press-card h3 {
   font-weight: 400;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 0.84rem;
+  line-height: 1.45;
   color: var(--ink);
   flex: 1;
   margin-bottom: 1.2rem;
@@ -982,7 +982,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   position: relative;
   overflow: hidden;
   text-align: center;
-  padding: clamp(5rem,10vw,10rem) clamp(1.25rem,5vw,3rem);
+  padding: clamp(4rem,7vw,7rem) clamp(1.25rem,5vw,3rem);
 }
 .cta-section::before {
   content: '';
@@ -1652,18 +1652,45 @@ footer::before {
         <button onclick="toggleEcosystem()" style="background:none;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);padding:0;display:flex;align-items:center;gap:0.6rem;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.75)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
           <span id="ecosystemArrow" style="display:inline-block;transition:transform 0.3s;">→</span> View ecosystem
         </button>
-        <div id="ecosystemPanel" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);">
-          <div style="display:flex;flex-wrap:wrap;gap:0.4rem 1.5rem;max-width:360px;">
-            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-bottom:0.2rem;">· Health ·</span>
-            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Avonova</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Hedvig</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Hoomu</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Hvild</span>
-            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-top:0.8rem;margin-bottom:0.2rem;">· Mobility ·</span>
-            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">GoFido</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Koala</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Petson</span>
-            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-top:0.8rem;margin-bottom:0.2rem;">· Employment ·</span>
-            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">JobbGarant</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Sum-it</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Tillit</span>
-            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-top:0.8rem;margin-bottom:0.2rem;">· Embedded ·</span>
-            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">CyVi</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Digisure</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">EasySure</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">NEXT</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Weecover</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Zmarta</span>
+        <div id="ecosystemPanel" style="display:none;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.07);transition:all 0.3s ease;">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2rem 3rem;max-width:380px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:0.7rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.06);">Health</div>
+            <div style="display:flex;flex-direction:column;gap:0.3rem;">
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Avonova</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Hedvig</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Hoomu</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Hvild</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:0.7rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.06);">Mobility</div>
+            <div style="display:flex;flex-direction:column;gap:0.3rem;">
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">GoFido</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Koala</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Petson</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:0.7rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.06);">Employment</div>
+            <div style="display:flex;flex-direction:column;gap:0.3rem;">
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">JobbGarant</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Sum-it</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Tillit</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:0.7rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(255,255,255,0.06);">Embedded</div>
+            <div style="display:flex;flex-direction:column;gap:0.3rem;">
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">CyVi</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Digisure</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">EasySure</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">NEXT</span>
+              <span style="font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:default;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Zmarta</span>
+            </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
 
@@ -1903,7 +1930,20 @@ function toggleEcosystem() {
   const arrow = document.getElementById('ecosystemArrow');
   if (!panel) return;
   const isOpen = panel.style.display !== 'none';
-  panel.style.display = isOpen ? 'none' : 'block';
+  if (isOpen) {
+    panel.style.opacity = '0';
+    panel.style.transform = 'translateY(-6px)';
+    setTimeout(() => { panel.style.display = 'none'; }, 220);
+  } else {
+    panel.style.display = 'block';
+    panel.style.opacity = '0';
+    panel.style.transform = 'translateY(-6px)';
+    panel.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    requestAnimationFrame(() => {
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+    });
+  }
   arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
 }
 
