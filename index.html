@@ -115,7 +115,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   inset: -80%;
   background: conic-gradient(from 0deg at 38% 55%,#162614 0deg,#2E4D2A 40deg,#5C7A5E 85deg,#3A5C3A 125deg,#0A1410 175deg,#1A2E1A 215deg,#E8631A 250deg,#2A3A28 280deg,#4A6E48 318deg,#162614 360deg);
   filter: blur(52px);
-  animation: heroCW 20s linear infinite;
+  animation: heroCW 32s linear infinite;
   opacity: .92;
   will-change: transform;
 }
@@ -125,7 +125,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   inset: -80%;
   background: conic-gradient(from 180deg at 62% 40%,#0A1410 0deg,#E8631A 28deg,#2E3D2F 70deg,#4A6E4A 115deg,#0A1410 165deg,#5C7A5E 205deg,#1A2A1A 252deg,#3A5030 298deg,#0A1410 360deg);
   filter: blur(68px);
-  animation: heroCCW 16s linear infinite;
+  animation: heroCCW 24s linear infinite;
   opacity: .76;
   will-change: transform;
 }
@@ -267,7 +267,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   inset: -400%;
   background: conic-gradient(from 0deg at 38% 55%,#162614 0deg,#2E4D2A 40deg,#5C7A5E 85deg,#3A5C3A 125deg,#0A1410 175deg,#1A2E1A 215deg,#E8631A 250deg,#2A3A28 280deg,#4A6E48 318deg,#162614 360deg);
   filter: blur(52px);
-  animation: heroCW 20s linear infinite;
+  animation: heroCW 32s linear infinite;
   opacity: .92;
   will-change: transform;
 }
@@ -283,11 +283,28 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   z-index: 2;
   overflow: hidden;
 }
+.marquee-inner::before,
+.marquee-inner::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+.marquee-inner::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(8,14,10,1) 0%, transparent 100%);
+}
+.marquee-inner::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(8,14,10,1) 0%, transparent 100%);
+}
 .marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marqueeScroll 80s linear infinite;
+  animation: marqueeScroll 120s linear infinite;
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -306,6 +323,17 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   flex-shrink: 0;
 }
 .marquee-item.bold { font-weight: 500; color: rgba(255,255,255,0.65); }
+.marquee-cat {
+  padding: 0 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
+}
 
 /* ── STATS ── */
 .stats {
@@ -852,7 +880,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 .press-card:hover .press-card-visual svg { transform: scale(1.03); }
 .press-card-text {
-  padding: 1.6rem 1.8rem 2rem;
+  padding: 1.4rem 1.6rem 1.6rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1370,41 +1398,45 @@ footer::before {
   <div class="marquee-inner">
     <div class="marquee-track">
       <span class="marquee-item bold">Hedvig</span>
-      <span class="marquee-item">Avonova</span>
+      <span class="marquee-item">Hoomu</span>
+      <span class="marquee-item bold">Hvild</span>
+      <span class="marquee-cat">· Health ·</span>
+      <span class="marquee-item bold">Avonova</span>
+      <span class="marquee-item">JobbGarant</span>
+      <span class="marquee-cat">· Employment ·</span>
+      <span class="marquee-item bold">GoFido</span>
+      <span class="marquee-item">Petson</span>
+      <span class="marquee-item bold">Koala</span>
+      <span class="marquee-cat">· Mobility ·</span>
+      <span class="marquee-item bold">NEXT</span>
+      <span class="marquee-item">Weecover</span>
+      <span class="marquee-cat">· Embedded ·</span>
       <span class="marquee-item bold">CyVi</span>
       <span class="marquee-item">Digisure</span>
       <span class="marquee-item bold">EasySure</span>
+      <span class="marquee-cat">· Retail ·</span>
       <span class="marquee-item">Fair Insurance</span>
-      <span class="marquee-item bold">GoFido</span>
-      <span class="marquee-item">Grønne Forsikringer</span>
-      <span class="marquee-item bold">Hakuna</span>
-      <span class="marquee-item">Hoomu</span>
-      <span class="marquee-item bold">Hvild</span>
-      <span class="marquee-item">JobbGarant</span>
-      <span class="marquee-item bold">NEXT</span>
-      <span class="marquee-item">Petson</span>
       <span class="marquee-item bold">Sum-it</span>
       <span class="marquee-item">Tillit</span>
-      <span class="marquee-item bold">Weecover</span>
-      <span class="marquee-item">Zmarta</span>
+      <span class="marquee-item bold">Zmarta</span>
+      <span class="marquee-cat">· Health ·</span>
       <span class="marquee-item bold">Hedvig</span>
-      <span class="marquee-item">Avonova</span>
+      <span class="marquee-item">Hoomu</span>
+      <span class="marquee-item bold">Hvild</span>
+      <span class="marquee-cat">· Employment ·</span>
+      <span class="marquee-item bold">Avonova</span>
+      <span class="marquee-item">JobbGarant</span>
+      <span class="marquee-cat">· Mobility ·</span>
+      <span class="marquee-item bold">GoFido</span>
+      <span class="marquee-item">Petson</span>
+      <span class="marquee-item bold">Koala</span>
+      <span class="marquee-cat">· Embedded ·</span>
+      <span class="marquee-item bold">NEXT</span>
+      <span class="marquee-item">Weecover</span>
+      <span class="marquee-cat">· Retail ·</span>
       <span class="marquee-item bold">CyVi</span>
       <span class="marquee-item">Digisure</span>
       <span class="marquee-item bold">EasySure</span>
-      <span class="marquee-item">Fair Insurance</span>
-      <span class="marquee-item bold">GoFido</span>
-      <span class="marquee-item">Grønne Forsikringer</span>
-      <span class="marquee-item bold">Hakuna</span>
-      <span class="marquee-item">Hoomu</span>
-      <span class="marquee-item bold">Hvild</span>
-      <span class="marquee-item">JobbGarant</span>
-      <span class="marquee-item bold">NEXT</span>
-      <span class="marquee-item">Petson</span>
-      <span class="marquee-item bold">Sum-it</span>
-      <span class="marquee-item">Tillit</span>
-      <span class="marquee-item bold">Weecover</span>
-      <span class="marquee-item">Zmarta</span>
     </div>
   </div>
 </div>
@@ -1490,8 +1522,9 @@ footer::before {
 
     </div>
 
-    <div class="offer-sub-row">
-      <p class="offer-sub-text">We handle licensing, risk, compliance and technology — so you can focus on your customers.</p>
+    <div class="offer-sub-row" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <p class="offer-sub-text" style="margin-bottom:0;">We handle licensing, risk, compliance and technology — so you can focus on your customers.</p>
+      <a href="capabilities.html" class="btn-secondary" style="white-space:nowrap;flex-shrink:0;">Explore capabilities →</a>
     </div>
 
   </div><!-- /offer-photo-wrap -->
@@ -1615,6 +1648,23 @@ footer::before {
         <div class="legend-item"><div class="legend-dot live"></div> Live markets</div>
         <div class="legend-item"><div class="legend-dot cross"></div> Cross-border license</div>
       </div>
+      <div style="margin-top:2.5rem;">
+        <button onclick="toggleEcosystem()" style="background:none;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);padding:0;display:flex;align-items:center;gap:0.6rem;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.75)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+          <span id="ecosystemArrow" style="display:inline-block;transition:transform 0.3s;">→</span> View ecosystem
+        </button>
+        <div id="ecosystemPanel" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem 1.5rem;max-width:360px;">
+            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-bottom:0.2rem;">· Health ·</span>
+            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Avonova</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Hedvig</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Hoomu</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Hvild</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-top:0.8rem;margin-bottom:0.2rem;">· Mobility ·</span>
+            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">GoFido</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Koala</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Petson</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-top:0.8rem;margin-bottom:0.2rem;">· Employment ·</span>
+            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">JobbGarant</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Sum-it</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Tillit</span>
+            <span style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.12em;color:rgba(255,255,255,0.2);text-transform:uppercase;width:100%;margin-top:0.8rem;margin-bottom:0.2rem;">· Embedded ·</span>
+            <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">CyVi</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Digisure</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">EasySure</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">NEXT</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Weecover</span><span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">Zmarta</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="map-visual-col">
@@ -1697,7 +1747,7 @@ footer::before {
   </div>
 
   <div style="margin-top:0.5rem">
-    <a href="/press" style="font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);text-decoration:none;">All press releases →</a>
+    <a href="press.html" style="font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);text-decoration:none;">All press releases →</a>
   </div>
 </section>
 
@@ -1707,7 +1757,7 @@ footer::before {
     <div>
       <p class="eyebrow">About Eir</p>
       <h2 class="section-h2">A Swedish licensed carrier<br>built for modern distribution.</h2>
-      <p style="font-size:0.9rem;line-height:1.7;color:rgba(255,255,255,0.65);margin-bottom:1.2rem">Eir combines insurance infrastructure, technology and licensing into a scalable platform for ambitious distribution partners across Europe.</p>
+      <p style="font-size:0.9rem;line-height:1.7;color:rgba(255,255,255,0.65);margin-bottom:1.2rem">Eir combines insurance infrastructure, technology and licensing into a scalable platform for distribution partners across Europe.</p>
       <p style="font-size:0.9rem;line-height:1.7;color:rgba(255,255,255,0.65)"></p>
       <div class="about-facts">
         <div class="about-fact">
@@ -1846,6 +1896,16 @@ window.addEventListener('scroll', () => {
   }
   lastScroll = current;
 });
+
+// Ecosystem panel toggle
+function toggleEcosystem() {
+  const panel = document.getElementById('ecosystemPanel');
+  const arrow = document.getElementById('ecosystemArrow');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+}
 
 // Map dots scroll animation
 (function() {
