@@ -1419,6 +1419,58 @@ footer::before {
   transform: scaleY(1);
 }
 
+
+/* ═══════════════════════════════════════
+   SECTION 05 — PRODUCTS 3D scroll animation
+═══════════════════════════════════════ */
+
+/* perspective wrapper on the grid */
+.products-dark-grid {
+  perspective: 1200px;
+}
+
+/* eyebrow starts hidden */
+.products-eyebrow-anim {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.products-eyebrow-anim.anim-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* each card: initial 3D resting state */
+.product-dark-tile {
+  opacity: 0;
+  transform: rotateY(-8deg) rotateX(4deg) translateY(40px);
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  will-change: opacity, transform;
+  /* transition smoothness driven by JS, but fallback: */
+  transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1),
+              transform 0.5s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.2s,
+              background 0.2s;
+}
+
+/* landed state */
+.product-dark-tile.anim-in {
+  opacity: 1;
+  transform: rotateY(0deg) rotateX(0deg) translateY(0px);
+}
+
+/* CTA below products */
+.products-cta-anim {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.products-cta-anim.anim-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 </head>
 <body>
@@ -1636,7 +1688,7 @@ footer::before {
 
   <div class="products-dark">
     <div class="products-dark-header">
-      <p class="eyebrow products-eyebrow" style="color:#fff">Products</p>
+      <p class="eyebrow products-eyebrow products-eyebrow-anim" style="color:#fff">Products</p>
     </div>
     <div class="products-dark-grid">
       <div class="product-dark-tile">
@@ -1686,7 +1738,7 @@ footer::before {
       </div>
     </div>
     <div style="padding-top:clamp(1rem,1.75vw,1.5rem);padding-bottom:0.5rem;">
-      <a href="products.html" class="btn-secondary" style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.75);">Explore our products →</a>
+      <a href="products.html" class="btn-secondary products-cta-anim" style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.75);">Explore our products →</a>
     </div>
   </div>
 </section>
@@ -2090,6 +2142,96 @@ function toggleEcosystem() {
   }, { threshold: [0, 0.4] });
 
   statsObs.observe(statsEl);
+})();
+
+
+// ═══════════════════════════════════════════════════════
+// SECTION 05 — PRODUCTS 3D scroll-driven animation
+// ═══════════════════════════════════════════════════════
+(function() {
+  const section = document.querySelector('.products-dark');
+  if (!section) return;
+
+  const eyebrow = section.querySelector('.products-eyebrow-anim');
+  const tiles   = Array.from(section.querySelectorAll('.product-dark-tile'));
+  const cta     = section.querySelector('.products-cta-anim');
+
+  // Scroll progress thresholds (0 = section enters viewport, 1 = section top at viewport top)
+  // Cards staggered ~0.12 apart to simulate 120ms delay at normal scroll speed
+  const IN  = { eyebrow: 0.08, card0: 0.18, card1: 0.30, card2: 0.42, card3: 0.54, cta: 0.66 };
+  const OUT = { cta: 0.60, card3: 0.48, card2: 0.36, card1: 0.24, card0: 0.14, eyebrow: 0.04 };
+
+  function getProgress() {
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const p = (vh - rect.top) / (vh + rect.height * 0.25);
+    return Math.max(0, Math.min(1, p));
+  }
+
+  // Interpolate card transform based on progress between start and landed
+  function getCardStyle(globalP, threshold) {
+    // local 0→1 progress for this card (0 = just started, 1 = fully landed)
+    const local = Math.max(0, Math.min(1, (globalP - threshold) / 0.18));
+    // ease: cubic bezier approximation — slow at end
+    const t = 1 - Math.pow(1 - local, 2.5);
+    const rotY   = -8 * (1 - t);
+    const rotX   =  4 * (1 - t);
+    const transY = 40 * (1 - t);
+    const opacity = t;
+    return { rotY, rotX, transY, opacity };
+  }
+
+  let lastP = -1;
+
+  function update() {
+    const p = getProgress();
+    if (Math.abs(p - lastP) < 0.0005) return;
+    const dir = p > lastP ? 1 : -1;
+    lastP = p;
+
+    const show = (el) => el && el.classList.add('anim-in');
+    const hide = (el) => el && el.classList.remove('anim-in');
+
+    // Eyebrow
+    p >= IN.eyebrow ? show(eyebrow) : hide(eyebrow);
+
+    // Cards — use direct style interpolation for smooth scrub
+    const cardThresholds = [IN.card0, IN.card1, IN.card2, IN.card3];
+    tiles.forEach((tile, i) => {
+      const threshold = cardThresholds[i];
+      if (p < OUT['card' + i] && dir < 0) {
+        // scrolling back up past out threshold — hide via class
+        tile.style.transform = '';
+        tile.style.opacity = '';
+        hide(tile);
+      } else if (p >= threshold) {
+        // within the landing zone — interpolate directly for scrub feel
+        const s = getCardStyle(p, threshold);
+        if (s.opacity >= 0.99) {
+          // fully landed — use class (cleaner)
+          tile.style.transform = '';
+          tile.style.opacity = '';
+          show(tile);
+        } else {
+          // mid-animation — set inline style for smooth scrub
+          tile.classList.remove('anim-in');
+          tile.style.opacity = s.opacity.toFixed(3);
+          tile.style.transform = `rotateY(${s.rotY.toFixed(2)}deg) rotateX(${s.rotX.toFixed(2)}deg) translateY(${s.transY.toFixed(2)}px)`;
+        }
+      } else {
+        // not yet reached
+        tile.style.transform = '';
+        tile.style.opacity = '';
+        hide(tile);
+      }
+    });
+
+    // CTA
+    p >= IN.cta ? show(cta) : hide(cta);
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
 // ═══════════════════════════════════════════════════════
