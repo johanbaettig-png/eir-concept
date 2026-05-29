@@ -1354,6 +1354,71 @@ footer::before {
   .products-grid { grid-template-columns: 1fr; }
   .market-lists { flex-direction: column; gap: 1.5rem; }
 }
+
+/* ═══════════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════════ */
+
+/* STATS — start invisible, fade in as group */
+.stats {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.stats.anim-visible {
+  opacity: 1;
+}
+
+/* OFFER section — all elements start hidden */
+.offer-eyebrow-wrap,
+.offer-headline-wrap {
+  overflow: hidden;
+}
+.offer-eyebrow-anim {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.offer-headline-anim {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.offer-guides-anim {
+  /* vertical guide lines drawn downward */
+}
+.offer-card-v {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.offer-sub-text-anim {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.offer-cta-anim {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Visible states */
+.offer-eyebrow-anim.anim-in  { opacity: 1; transform: translateY(0); }
+.offer-headline-anim.anim-in { opacity: 1; transform: translateY(0); }
+.offer-card-v.anim-in        { opacity: 1; transform: translateY(0); }
+.offer-sub-text-anim.anim-in { opacity: 1; transform: translateY(0); }
+.offer-cta-anim.anim-in      { opacity: 1; transform: translateY(0); }
+
+/* Guide line draw animation */
+.offer-cards-visual::before {
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.offer-cards-visual.guides-in::before {
+  transform: scaleY(1);
+}
+
 </style>
 </head>
 <body>
@@ -1505,8 +1570,8 @@ footer::before {
     </video>
 
     <div class="offer-header">
-      <p class="eyebrow" style="color:var(--sage)">Capabilities</p>
-      <h2 class="section-h2" style="color:#fff">Built for partners who<br>want to move faster.</h2>
+      <p class="eyebrow offer-eyebrow-anim" style="color:var(--sage)">Capabilities</p>
+      <h2 class="section-h2 offer-headline-anim" style="color:#fff">Built for partners who<br>want to move faster.</h2>
     </div>
 
     <div class="offer-cards-visual">
@@ -1563,8 +1628,8 @@ footer::before {
     </div>
 
     <div class="offer-sub-row" style="display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:2rem;">
-      <p class="offer-sub-text" style="margin-bottom:0;">We handle licensing, risk, compliance and technology, so you can focus on your customers.</p>
-      <a href="capabilities.html" class="btn-secondary" style="white-space:nowrap;flex-shrink:0;">Explore capabilities →</a>
+      <p class="offer-sub-text offer-sub-text-anim" style="margin-bottom:0;">We handle licensing, risk, compliance and technology, so you can focus on your customers.</p>
+      <a href="capabilities.html" class="btn-secondary offer-cta-anim" style="white-space:nowrap;flex-shrink:0;">Explore capabilities →</a>
     </div>
 
   </div><!-- /offer-photo-wrap -->
@@ -1963,6 +2028,161 @@ function toggleEcosystem() {
     arrow.style.transform = 'rotate(90deg)';
   }
 }
+
+// ═══════════════════════════════════════════════════════
+// SECTION 03 — STATS counter animation
+// ═══════════════════════════════════════════════════════
+(function() {
+  const statsEl = document.querySelector('.stats');
+  if (!statsEl) return;
+
+  const targets = [
+    { el: statsEl.querySelectorAll('.stat-num')[0], end: 10, suffix: '+' },
+    { el: statsEl.querySelectorAll('.stat-num')[1], end: 100, suffix: '%' },
+    { el: statsEl.querySelectorAll('.stat-num')[2], end: 20, suffix: '+' },
+  ];
+
+  let played = false;
+  let inView = false;
+
+  function easeOut(t) {
+    // strong ease-out: fast start, very slow finish
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animateCounters() {
+    if (played) return;
+    played = true;
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now) {
+      const raw = Math.min((now - start) / duration, 1);
+      const t = easeOut(raw);
+      targets.forEach(({ el, end, suffix }) => {
+        const val = Math.round(t * end);
+        // preserve the <sup> tag
+        el.innerHTML = val + '<sup>' + suffix + '</sup>';
+      });
+      if (raw < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio >= 0.4) {
+        statsEl.classList.add('anim-visible');
+        animateCounters();
+        inView = true;
+      } else if (!e.isIntersecting) {
+        if (inView) {
+          // reset so it can replay when fully out + back in
+          played = false;
+          // reset number display
+          targets.forEach(({ el, end, suffix }) => {
+            el.innerHTML = '0<sup>' + suffix + '</sup>';
+          });
+          statsEl.classList.remove('anim-visible');
+        }
+        inView = false;
+      }
+    });
+  }, { threshold: [0, 0.4] });
+
+  statsObs.observe(statsEl);
+})();
+
+// ═══════════════════════════════════════════════════════
+// SECTION 04 — CAPABILITIES scroll-driven animation
+// ═══════════════════════════════════════════════════════
+(function() {
+  const section = document.getElementById('offer');
+  if (!section) return;
+
+  const eyebrow  = section.querySelector('.offer-eyebrow-anim');
+  const headline = section.querySelector('.offer-headline-anim');
+  const cards    = Array.from(section.querySelectorAll('.offer-card-v'));
+  const cardsWrap= section.querySelector('.offer-cards-visual');
+  const subText  = section.querySelector('.offer-sub-text-anim');
+  const cta      = section.querySelector('.offer-cta-anim');
+
+  // Thresholds: at what scroll progress (0–1 through section) each phase triggers
+  // Progress = how far the section has scrolled into viewport
+  const PHASE = {
+    eyebrow:  0.08,
+    headline: 0.14,
+    guides:   0.20,
+    card0:    0.27,
+    card1:    0.38,
+    card2:    0.49,
+    card3:    0.60,
+    subText:  0.72,
+    cta:      0.80,
+  };
+
+  // Reverse thresholds (when scrolling back up, hide slightly earlier)
+  const PHASE_OUT = {
+    cta:      0.75,
+    subText:  0.67,
+    card3:    0.55,
+    card2:    0.44,
+    card1:    0.33,
+    card0:    0.22,
+    guides:   0.16,
+    headline: 0.10,
+    eyebrow:  0.04,
+  };
+
+  function getProgress() {
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // 0 = section just entered bottom of viewport
+    // 1 = section has scrolled so top is at top of viewport
+    const p = (vh - rect.top) / (vh + rect.height * 0.3);
+    return Math.max(0, Math.min(1, p));
+  }
+
+  let lastProgress = -1;
+
+  function update() {
+    const p = getProgress();
+    if (Math.abs(p - lastProgress) < 0.001) return;
+    const dir = p > lastProgress ? 1 : -1;
+    lastProgress = p;
+
+    // helper
+    const show = (el) => el && el.classList.add('anim-in');
+    const hide = (el) => el && el.classList.remove('anim-in');
+
+    if (dir >= 0) {
+      // scrolling down — reveal
+      if (p >= PHASE.eyebrow)  show(eyebrow);
+      if (p >= PHASE.headline) show(headline);
+      if (p >= PHASE.guides && cardsWrap) cardsWrap.classList.add('guides-in');
+      if (p >= PHASE.card0)    show(cards[0]);
+      if (p >= PHASE.card1)    show(cards[1]);
+      if (p >= PHASE.card2)    show(cards[2]);
+      if (p >= PHASE.card3)    show(cards[3]);
+      if (p >= PHASE.subText)  show(subText);
+      if (p >= PHASE.cta)      show(cta);
+    } else {
+      // scrolling up — conceal in reverse
+      if (p < PHASE_OUT.cta)     hide(cta);
+      if (p < PHASE_OUT.subText) hide(subText);
+      if (p < PHASE_OUT.card3)   hide(cards[3]);
+      if (p < PHASE_OUT.card2)   hide(cards[2]);
+      if (p < PHASE_OUT.card1)   hide(cards[1]);
+      if (p < PHASE_OUT.card0)   hide(cards[0]);
+      if (p < PHASE_OUT.guides && cardsWrap) cardsWrap.classList.remove('guides-in');
+      if (p < PHASE_OUT.headline) hide(headline);
+      if (p < PHASE_OUT.eyebrow)  hide(eyebrow);
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update(); // initial state
+
+})();
 
 // Map dots scroll animation
 (function() {
