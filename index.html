@@ -451,7 +451,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   font-weight: 300;
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   line-height: 1.06;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.005em;
   margin-bottom: 1.2rem;
 }
 .section-sub {
@@ -590,7 +590,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
       rgba(8,14,10,0.25) 100%
     ),
     var(--sage);
-  padding: clamp(3rem,5vw,5rem) clamp(1.25rem,5vw,3rem);
+  padding: clamp(3rem,5vw,5rem) clamp(1.25rem,5vw,3rem) clamp(1.5rem,2.5vw,2rem);
 }
 .products-eyebrow::before { background: var(--orange); }
 
@@ -767,32 +767,35 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   color: #fff;
   padding: 0;
   position: relative;
-  overflow: hidden;
-  height: 680px;
-  max-height: 680px; /* Belt-and-suspenders: never grows */
+  overflow: visible; /* allow section to grow downward */
 }
-.map-text-col {
+/* The map bg is fixed height, anchored top */
+.map-section-bg {
   position: absolute;
-  z-index: 2;
   top: 0;
   left: 0;
+  right: 0;
+  height: clamp(580px, 44vw, 760px);
+  overflow: hidden;
+  pointer-events: none;
+}
+.map-text-col {
+  position: relative;
+  z-index: 2;
   width: 44%;
-  height: 100%;
   padding: clamp(4rem,7vw,7rem) clamp(1.25rem,5vw,3rem);
-  overflow-y: auto;
+  padding-bottom: clamp(4rem,7vw,7rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* Hide scrollbar but allow scroll for ecosystem panel */
-  scrollbar-width: none;
+  min-height: clamp(580px, 44vw, 760px);
 }
-.map-text-col::-webkit-scrollbar { display: none; }
-/* Right col: absolute, always covers right 62%, full height */
+/* Right col: absolute within the bg, always covers right 62% at map height */
 .map-visual-col {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
+  height: clamp(580px, 44vw, 760px);
   width: 62%;
   overflow: hidden;
   pointer-events: none;
@@ -836,8 +839,8 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 .map-section.dots-visible .map-dot { opacity:1; transform:scale(1); }
 .map-section.dots-hidden .map-dot { opacity:0; transform:scale(0); }
 @media(max-width:768px) {
-  .map-text-col { width:100%; }
-  .map-visual-col { position:relative; width:100%; height:320px; top:auto; right:auto; bottom:auto; }
+  .map-text-col { width:100%; min-height:auto; }
+  .map-visual-col { position:relative; width:100%; height:320px; top:auto; right:auto; }
   .market-lists { gap:2rem; }
 }
 
@@ -1576,6 +1579,9 @@ footer::before {
         <p>Additional flexibility for customer-specific needs.</p>
       </div>
     </div>
+    <div style="padding-top:clamp(1rem,1.75vw,1.5rem);padding-bottom:0.5rem;">
+      <a href="products.html" class="btn-secondary" style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.75);">Explore our products →</a>
+    </div>
   </div>
 </section>
 
@@ -1650,8 +1656,11 @@ footer::before {
       <span id="ecosystemArrow" style="display:inline-block;transition:transform 0.3s;">→</span>
       View ecosystem
     </button>
+  </div>
 
-    <div id="ecosystemPanel" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);opacity:0;transition:opacity 0.3s ease,transform 0.3s ease;transform:translateY(-6px);overflow:hidden;">
+  <!-- Ecosystem panel: sits BELOW the map row, expands the section downward -->
+  <div id="ecosystemPanel" style="display:none;position:relative;z-index:2;width:44%;padding:0 clamp(1.25rem,5vw,3rem) clamp(3rem,5vw,4rem);opacity:0;transition:opacity 0.3s ease,transform 0.3s ease;transform:translateY(-8px);">
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.8rem;">
       <div class="eco-grid">
         <div class="eco-col"><div class="eco-cat">Health</div><div class="eco-names"><span>Avonova</span><span>Hedvig</span><span>Hoomu</span><span>Hvild</span></div></div>
         <div class="eco-col"><div class="eco-cat">Mobility</div><div class="eco-names"><span>GoFido</span><span>Koala</span><span>Petson</span></div></div>
@@ -1777,10 +1786,9 @@ footer::before {
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="cta-inner">
-    <p class="cta-eyebrow">Ready to launch faster?</p>
-    <h2 class="cta-h2">Let's explore<br>how <span>Eir</span> can support<br>your model.</h2>
+    <h2 class="cta-h2">Launch with a carrier<br>built for <span>scale.</span></h2>
     <a href="contact.html" class="btn-primary" style="margin:0 auto;display:inline-flex">
-      Contact <span class="dot"></span>
+      Explore a partnership <span class="dot"></span>
     </a>
   </div>
 </section>
