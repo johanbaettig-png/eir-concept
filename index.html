@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eir Insurance — Concept</title>
+<title>Eir Insurance, Concept</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -199,7 +199,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   background: var(--orange);
   color: #fff;
   border: none;
-  padding: 0.9em 2em;
+  padding: 0.85em 2.2em;
   border-radius: 2rem;
   cursor: pointer;
   display: inline-flex;
@@ -223,7 +223,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   background: transparent;
   color: rgba(255,255,255,0.7);
   border: 1px solid rgba(255,255,255,0.25);
-  padding: 0.9em 2em;
+  padding: 0.85em 2.2em;
   border-radius: 2rem;
   cursor: pointer;
   text-decoration: none;
@@ -426,12 +426,12 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
 
 /* ── SECTIONS SHARED ── */
 section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
-/* Hero overrides global section padding — hero-body handles its own spacing */
+/* Hero overrides global section padding, hero-body handles its own spacing */
 .hero { padding: 0; }
 .eyebrow {
   font-family: 'DM Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.22em;
+  font-size: 0.5rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--sage);
   margin-bottom: 1.2rem;
@@ -451,7 +451,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   font-weight: 300;
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   line-height: 1.06;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
   margin-bottom: 1.2rem;
 }
 .section-sub {
@@ -807,10 +807,12 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 .map-img-wrap {
   position: absolute;
-  top: -5%;
-  bottom: -5%;
-  left: -25%;
-  right: -5%;
+  top: 0;
+  bottom: 0;
+  left: -15%;
+  right: 0;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 .map-bg-img {
   width: 100%;
@@ -846,7 +848,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 
 /* ── PRESS ── */
-.press-section { background: var(--bg); color: var(--ink); }
+.press-section { background: var(--bg); color: var(--ink); padding-top: clamp(3rem,5vw,5rem) !important; padding-bottom: clamp(3rem,5vw,5rem) !important; }
 .press-grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -982,7 +984,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   position: relative;
   overflow: hidden;
   text-align: center;
-  padding: clamp(4rem,7vw,7rem) clamp(1.25rem,5vw,3rem);
+  padding: clamp(3.5rem,6vw,6rem) clamp(1.25rem,5vw,3rem);
 }
 .cta-section::before {
   content: '';
@@ -1155,7 +1157,7 @@ footer::before {
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; }
 
-  /* Fullscreen mobile menu — hidden on desktop */
+  /* Fullscreen mobile menu, hidden on desktop */
   .mobile-menu {
     display: none;
     position: fixed;
@@ -1522,8 +1524,8 @@ footer::before {
 
     </div>
 
-    <div class="offer-sub-row" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
-      <p class="offer-sub-text" style="margin-bottom:0;">We handle licensing, risk, compliance and technology — so you can focus on your customers.</p>
+    <div class="offer-sub-row" style="display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:2rem;">
+      <p class="offer-sub-text" style="margin-bottom:0;">We handle licensing, risk, compliance and technology, so you can focus on your customers.</p>
       <a href="capabilities.html" class="btn-secondary" style="white-space:nowrap;flex-shrink:0;">Explore capabilities →</a>
     </div>
 
@@ -1589,7 +1591,7 @@ footer::before {
     <div>
       <p class="eyebrow" style="color:var(--orange)">How it works</p>
       <h2 class="section-h2">From conversation<br>to live product.</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.5)">From needs mapping to configuration, integration and launch — with speed and precision.</p>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5)">From needs mapping to configuration, integration and launch, with speed and precision.</p>
     </div>
     <div class="how-steps">
       <div class="how-step">
@@ -1736,7 +1738,7 @@ footer::before {
   <div class="press-grid">
 
     <!-- Card 1: Funding round -->
-    <a class="press-card" href="#">
+    <a class="press-card" href="press.html">
       <div class="press-card-text">
         <div>
           <span class="press-tag">Funding · Oct 2025</span>
@@ -1748,7 +1750,7 @@ footer::before {
     </a>
 
     <!-- Card 2: Fertility+ partnership -->
-    <a class="press-card" href="#">
+    <a class="press-card" href="press.html">
       <div class="press-card-text">
         <div>
           <span class="press-tag">Partnership · Apr 2026</span>
@@ -1760,7 +1762,7 @@ footer::before {
     </a>
 
     <!-- Card 3: European expansion -->
-    <a class="press-card" href="#">
+    <a class="press-card" href="press.html">
       <div class="press-card-text">
         <div>
           <span class="press-tag">Expansion · Nov 2024</span>
@@ -1799,7 +1801,7 @@ footer::before {
           <div class="about-fact-label">HQ</div>
           <div class="about-fact-value">Stockholm</div>
         </div>
-          <a href="about.html" class="btn-secondary" style="margin-top:2rem;display:inline-flex">About Eir →</a>
+          <a href="about.html" class="btn-secondary" style="margin-top:2rem;display:inline-flex;">About Eir →</a>
     </div>
     </div>
   </div>
@@ -1844,7 +1846,7 @@ footer::before {
       <ul>
         <li><a href="capabilities.html">Capabilities</a></li>
         <li><a href="products.html">Products</a></li>
-        <li><a href="#">Financial information</a></li>
+        <li><a href="press.html">Financial information</a></li>
       </ul>
     </div>
 
@@ -1871,10 +1873,10 @@ footer::before {
   </div>
   <div class="footer-bottom">
     <div class="footer-legal">
-      <a href="#">Financial information</a>
-      <a href="#">Privacy policy &amp; cookies</a>
-      <a href="#">Complaints</a>
-      <a href="#">Already insured with Eir?</a>
+      <a href="press.html">Financial information</a>
+      <a href="press.html">Privacy policy &amp; cookies</a>
+      <a href="press.html">Complaints</a>
+      <a href="press.html">Already insured with Eir?</a>
     </div>
     <span class="footer-copy">© 2026 Eir Försäkring AB · Org: 559166-0617</span>
   </div>
