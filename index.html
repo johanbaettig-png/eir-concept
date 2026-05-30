@@ -270,20 +270,9 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   padding: 0.8rem 0;
   background: var(--dark);
   z-index: 1;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
 }
-.marquee-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 60% 200% at 20% 50%, rgba(44,78,48,0.35) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 200% at 80% 50%, rgba(28,52,32,0.25) 0%, transparent 70%),
-    rgba(0,0,0,0.35);
-  z-index: 0;
-  pointer-events: none;
-}
+
 
 .marquee-section::after {
   content: '';
@@ -371,84 +360,32 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
 }
 .stat {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   padding: clamp(2.5rem,4.5vw,4.5rem) clamp(1.5rem,3vw,3rem);
   background: transparent;
   border: none;
-}
-.stat-conic {
-  position: absolute;
-  inset: -120%;
-  filter: blur(55px);
-  opacity: 0.13;
-  pointer-events: none;
-  background: conic-gradient(from 0deg at 38% 55%,
-    #162614 0deg, #2E4D2A 40deg, #5C7A5E 85deg,
-    #3A5C3A 125deg, #0A1410 175deg, #1A2E1A 215deg,
-    #d86b32 250deg, #2A3A28 280deg, #4A6E48 318deg, #162614 360deg);
-}
-.stat:nth-child(1) .stat-conic { animation: heroCW 18s linear infinite; transform-origin: 80% 20%; }
-.stat:nth-child(2) .stat-conic {
-  background: conic-gradient(from 180deg at 62% 40%,
-    #0A1410 0deg, #d86b32 28deg, #2E3D2F 70deg,
-    #4A6E4A 115deg, #0A1410 165deg, #5C7A5E 205deg,
-    #1A2A1A 252deg, #3A5030 298deg, #0A1410 360deg);
-  animation: heroCCW 14s linear infinite;
-  animation-delay: -6s;
-  transform-origin: 20% 80%;
-}
-.stat:nth-child(3) .stat-conic { animation: heroCW 22s linear infinite; animation-delay: -11s; transform-origin: 50% 50%; opacity: 0.11; }
-.stat-num {
+}.stat-num {
   font-weight: 300;
   font-size: clamp(4.24rem, 9.54vw, 8.48rem);
   line-height: 1;
-  letter-spacing: -0.05em;
-  display: flex;
-  align-items: baseline;
-  gap: 0.04em;
-  position: relative;
-  z-index: 1;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 300% 300%;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  display: block;
+  margin-bottom: 0.8rem;
+  background-image: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: unset;
 }
-.stat:nth-child(1) .stat-num {
-  background-image: conic-gradient(from 0deg at 38% 55%,
-    #162614 0deg, #2E4D2A 40deg, #5C7A5E 85deg,
-    #3A5C3A 125deg, #0A1410 175deg, #1A2E1A 215deg,
-    #d86b32 250deg, #2A3A28 280deg, #4A6E48 318deg, #162614 360deg);
-  animation: gsAnim1 18s linear infinite;
-}
-.stat:nth-child(2) .stat-num {
-  background-image: conic-gradient(from 180deg at 62% 40%,
-    #0A1410 0deg, #d86b32 28deg, #2E3D2F 70deg,
-    #4A6E4A 115deg, #0A1410 165deg, #5C7A5E 205deg,
-    #1A2A1A 252deg, #3A5030 298deg, #0A1410 360deg);
-  animation: gsAnim2 14s linear infinite;
-  animation-delay: -6s;
-}
-.stat:nth-child(3) .stat-num {
-  background-image: conic-gradient(from 90deg at 50% 50%,
-    #162614 0deg, #5C7A5E 60deg, #2E4D2A 120deg,
-    #d86b32 200deg, #0A1410 260deg, #2E4D2A 320deg, #162614 360deg);
-  animation: gsAnim3 22s linear infinite;
-  animation-delay: -11s;
-}
-@keyframes gsAnim1 { from{background-position:0% 50%}   to{background-position:100% 50%} }
-@keyframes gsAnim2 { from{background-position:100% 50%} to{background-position:0% 50%} }
-@keyframes gsAnim3 { from{background-position:50% 0%}   to{background-position:50% 100%} }
-.stat-num sup { font-size: 0.32em; font-family: 'DM Mono', monospace; }
-.stat-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.48rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #7A7A6A;
-  margin-top: 0.8rem;
-  position: relative;
-  z-index: 1;
-}
+.stat:nth-child(3) .stat-num { color: var(--orange); }
+
+
+
+
+.stat:nth-child(1) 
+.stat:nth-child(2) 
+.stat:nth-child(3) 
+
 
 /* ── SECTIONS SHARED ── */
 section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
@@ -1028,7 +965,7 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
 }
 
 /* ── PRESS ── */
-.press-section { background: var(--bg); color: var(--ink); padding-top: clamp(3rem,5vw,5rem) !important; padding-bottom: clamp(3rem,5vw,5rem) !important; }
+.press-section { background: var(--bg); color: var(--ink); padding: clamp(3rem,5vw,5rem) clamp(1.25rem,5vw,3rem) !important; }
 .press-grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -1705,6 +1642,17 @@ footer::before {
 /* Press eyebrow + headline */
 /* press reveal handled by JS IO system */
 
+
+.stat-num {
+  font-weight: 300;
+  font-size: clamp(4.24rem, 9.54vw, 8.48rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.stat:nth-child(3) .stat-num { color: var(--orange); }
 </style>
 </head>
 <body>
@@ -1831,17 +1779,14 @@ footer::before {
 <!-- STATS -->
 <div class="stats">
   <div class="stat">
-    <div class="stat-conic"></div>
     <div class="stat-num">10<sup>+</sup></div>
     <div class="stat-label">Countries live</div>
   </div>
   <div class="stat">
-    <div class="stat-conic"></div>
     <div class="stat-num">100<sup>%</sup></div>
     <div class="stat-label">Digital</div>
   </div>
   <div class="stat">
-    <div class="stat-conic"></div>
     <div class="stat-num">20<sup>+</sup></div>
     <div class="stat-label">Active partners</div>
   </div>
@@ -2194,8 +2139,8 @@ footer::before {
           <div class="about-fact-label">HQ</div>
           <div class="about-fact-value">Stockholm</div>
         </div>
-          <a href="about.html" class="btn-secondary about-btn">About Eir →</a>
-    </div>
+      </div>
+      <a href="about.html" class="btn-secondary about-btn">About Eir →</a>
     </div>
   </div>
 </section>
@@ -2341,59 +2286,67 @@ function toggleEcosystem() {
 }
 
 // ═══════════════════════════════════════════════════════
-// SECTION 03 — STATS: materialize → then count
+// SECTION 03 — STATS
+// Numbers always visible. Count-up animates on scroll.
 // ═══════════════════════════════════════════════════════
 (function() {
-  const statsEl = document.querySelector('.stats');
+  var statsEl = document.querySelector('.stats');
   if (!statsEl) return;
 
-  const targets = [
-    { el: statsEl.querySelectorAll('.stat-num')[0], end: 10, suffix: '+' },
-    { el: statsEl.querySelectorAll('.stat-num')[1], end: 100, suffix: '%' },
-    { el: statsEl.querySelectorAll('.stat-num')[2], end: 20, suffix: '+' },
+  var statNums = Array.prototype.slice.call(statsEl.querySelectorAll('.stat-num'));
+  var statLabels = Array.prototype.slice.call(statsEl.querySelectorAll('.stat-label'));
+
+  var targets = [
+    { el: statNums[0], end: 10,  suffix: '+' },
+    { el: statNums[1], end: 100, suffix: '%' },
+    { el: statNums[2], end: 20,  suffix: '+' },
   ];
 
-  // Initialise numbers at 0
-  targets.forEach(({ el, suffix }) => {
-    el.innerHTML = '0<sup>' + suffix + '</sup>';
-  });
+  function resetNums() {
+    targets.forEach(function(t) {
+      t.el.innerHTML = '0<sup>' + t.suffix + '</sup>';
+    });
+  }
 
-  let counted = false;
+  var counted = false;
 
   function runCounters() {
     if (counted) return;
     counted = true;
-    const duration = 1600;
-    const start = performance.now();
+    var duration = 1400;
+    var startTime = performance.now();
     function tick(now) {
-      const raw = Math.min((now - start) / duration, 1);
-      const t = 1 - Math.pow(1 - raw, 3); // ease-out cubic
-      targets.forEach(({ el, end, suffix }) => {
-        el.innerHTML = Math.round(t * end) + '<sup>' + suffix + '</sup>';
+      var raw = Math.min((now - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - raw, 3);
+      targets.forEach(function(t) {
+        t.el.innerHTML = Math.round(ease * t.end) + '<sup>' + t.suffix + '</sup>';
       });
       if (raw < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
 
-  // Blur-in via scroll progress (same system as Products — works in all viewports)
-  // Count-up triggers once stats is well into view
-  let statsShown = false;
+  // No fade animation — stats always visible and sharp.
+  // Only count-up animates on scroll.
+  resetNums();
 
-  // Count-up via IntersectionObserver — iOS-safe
-  var countObs = new IntersectionObserver(function(entries) {
+  // Show final numbers immediately (always visible, no animation dependency)
+  targets.forEach(function(t) {
+    t.el.innerHTML = t.end + '<sup>' + t.suffix + '</sup>';
+  });
+
+  // Count-up replays when section enters viewport
+  var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
-        setTimeout(runCounters, 400);
-      } else {
+        resetNums();
         counted = false;
-        targets.forEach(function(t) {
-          t.el.innerHTML = '0<sup>' + t.suffix + '</sup>';
-        });
+        setTimeout(runCounters, 150);
       }
     });
-  }, { threshold: 0.3 });
-  countObs.observe(statsEl);
+  }, { threshold: 0 });
+
+  observer.observe(statsEl);
 })();
 
 
