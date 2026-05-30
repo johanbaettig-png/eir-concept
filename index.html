@@ -234,7 +234,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   width: fit-content;
   transition: border-color 0.2s, color 0.2s;
 }
-.about-btn { margin-top: 2rem; }
+
 .btn-secondary:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
 .hero-scroll {
   position: absolute;
@@ -268,9 +268,24 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
   padding: 0.8rem 0;
-  background: var(--dark);
-  z-index: 1;
+  background: transparent;
+  z-index: 2;
   width: 100%;
+  margin-top: -3.2rem;
+}
+.marquee-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg,
+      rgba(44,62,34,0.72) 0%,
+      rgba(10,20,16,0.82) 40%,
+      rgba(28,48,32,0.75) 70%,
+      rgba(10,20,16,0.85) 100%);
+  mix-blend-mode: multiply;
+  z-index: 0;
+  pointer-events: none;
 }
 
 
@@ -286,28 +301,14 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   z-index: 2;
   overflow: hidden;
 }
-.marquee-inner::before,
-.marquee-inner::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 200px;
-  z-index: 10;
-  pointer-events: none;
-}
-.marquee-inner::before {
-  left: 0;
-  background: linear-gradient(to right, var(--dark) 0%, transparent 100%);
-}
-.marquee-inner::after {
-  right: 0;
-  background: linear-gradient(to left, var(--dark) 0%, transparent 100%);
-}
+
+
+
 .marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marqueeScroll 120s linear infinite;
+  animation: marqueeScroll 114s linear infinite;
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -364,27 +365,113 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
   padding: clamp(2.5rem,4.5vw,4.5rem) clamp(1.5rem,3vw,3rem);
   background: transparent;
   border: none;
-}.stat-num {
+}
+.stat-conic {
+  position: absolute;
+  inset: -120%;
+  filter: blur(55px);
+  opacity: 0.13;
+  pointer-events: none;
+  background: conic-gradient(from 0deg at 38% 55%,
+    #162614 0deg, #2E4D2A 40deg, #5C7A5E 85deg,
+    #3A5C3A 125deg, #0A1410 175deg, #1A2E1A 215deg,
+    #d86b32 250deg, #2A3A28 280deg, #4A6E48 318deg, #162614 360deg);
+  animation: gsAnim1 18s linear infinite;
+}
+.stat:nth-child(2) .stat-conic {
+  background: conic-gradient(from 180deg at 62% 40%,
+    #0A1410 0deg, #d86b32 28deg, #2E3D2F 70deg,
+    #4A6E4A 115deg, #0A1410 165deg, #5C7A5E 205deg,
+    #1A2A1A 252deg, #3A5030 295deg, #d86b32 335deg, #0A1410 360deg);
+  animation: gsAnim1 22s linear infinite reverse;
+}
+.stat:nth-child(3) .stat-conic {
+  background: conic-gradient(from 90deg at 50% 50%,
+    #162614 0deg, #5C7A5E 60deg, #2E4D2A 120deg,
+    #d86b32 200deg, #0A1410 260deg, #2E4D2A 320deg, #162614 360deg);
+  animation: gsAnim1 15s linear infinite;
+  animation-delay: -7s;
+}
+@keyframes gsAnim1 {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes statTextGradient1 {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes statTextGradient2 {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes statTextGradient3 {
+  0%   { background-position: 50% 0%; }
+  100% { background-position: 50% 100%; }
+}
+.stat-num {
   font-weight: 300;
   font-size: clamp(4.24rem, 9.54vw, 8.48rem);
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--forest);
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 0.035em;
+  overflow: visible;
   margin-bottom: 0.8rem;
-  background-image: none;
-  -webkit-background-clip: unset;
-  background-clip: unset;
-  -webkit-text-fill-color: unset;
+  position: relative;
+  background-image: conic-gradient(from 0deg at 38% 55%,
+    #162614 0deg, #2E4D2A 40deg, #5C7A5E 85deg,
+    #3A5C3A 125deg, #0A1410 175deg, #1A2E1A 215deg,
+    #d86b32 250deg, #2A3A28 280deg, #4A6E48 318deg, #162614 360deg);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: statTextGradient1 18s ease-in-out infinite alternate;
 }
-.stat:nth-child(3) .stat-num { color: var(--orange); }
+.stat:nth-child(2) .stat-num {
+  background-image: conic-gradient(from 180deg at 62% 40%,
+    #0A1410 0deg, #d86b32 28deg, #2E3D2F 70deg,
+    #4A6E4A 115deg, #0A1410 165deg, #5C7A5E 205deg,
+    #1A2A1A 252deg, #3A5030 295deg, #d86b32 335deg, #0A1410 360deg);
+  background-size: 300% 300%;
+  animation: statTextGradient2 22s ease-in-out infinite alternate;
+}
+.stat:nth-child(3) .stat-num {
+  background-image: conic-gradient(from 90deg at 50% 50%,
+    #162614 0deg, #5C7A5E 60deg, #2E4D2A 120deg,
+    #d86b32 200deg, #0A1410 260deg, #2E4D2A 320deg, #162614 360deg);
+  background-size: 300% 300%;
+  animation: statTextGradient3 20s ease-in-out infinite alternate;
+}
+.stat-num sup {
+  display: inline-block;
+  font-size: 0.30em;
+  line-height: 1;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  position: relative;
+  transform: translateY(0.03em);
+  vertical-align: baseline;
+  background: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 1;
+  visibility: visible;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(28,28,28,0.45);
+}
 
-
-
-
-.stat:nth-child(1) 
-.stat:nth-child(2) 
-.stat:nth-child(3) 
 
 
 /* ── SECTIONS SHARED ── */
@@ -1082,12 +1169,19 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   flex-wrap: wrap;
   margin-top: 2.5rem;
   border-top: 1px solid rgba(255,255,255,0.1);
-  max-width: 640px;
+  width: fit-content;
 }
 .about-fact {
   padding: 1.2rem 2rem 1.2rem 0;
   margin-right: 2rem;
   border-right: 1px solid rgba(255,255,255,0.1);
+}
+.about-fact--btn {
+  border-right: none;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  margin-right: 0;
 }
 .about-fact:last-child { border-right: none; }
 .about-fact-label {
@@ -1468,14 +1562,7 @@ footer::before {
    SCROLL ANIMATIONS
 ═══════════════════════════════════════════ */
 
-/* STATS — start invisible, fade in as group */
-.stats {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-.stats.anim-visible {
-  opacity: 1;
-}
+
 
 /* OFFER section — all elements start hidden */
 .offer-eyebrow-wrap,
@@ -1612,16 +1699,7 @@ footer::before {
 .g-reveal[data-delay="4"] { transition-delay: 0.32s; }
 .g-reveal[data-delay="5"] { transition-delay: 0.40s; }
 
-/* Stats: section fades in, then counters run */
-.stats {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(14px);
-  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
-              filter 0.6s cubic-bezier(0.16,1,0.3,1),
-              transform 0.7s cubic-bezier(0.16,1,0.3,1);
-}
-.stats.g-visible { opacity: 1; filter: blur(0px); transform: translateY(0); }
+
 
 /* Map section text + dots */
 /* map-text-col reveal handled by JS */
@@ -1643,16 +1721,7 @@ footer::before {
 /* press reveal handled by JS IO system */
 
 
-.stat-num {
-  font-weight: 300;
-  font-size: clamp(4.24rem, 9.54vw, 8.48rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--forest);
-  display: block;
-  margin-bottom: 0.8rem;
-}
-.stat:nth-child(3) .stat-num { color: var(--orange); }
+
 </style>
 </head>
 <body>
@@ -1779,14 +1848,17 @@ footer::before {
 <!-- STATS -->
 <div class="stats">
   <div class="stat">
+    <div class="stat-conic"></div>
     <div class="stat-num">10<sup>+</sup></div>
     <div class="stat-label">Countries live</div>
   </div>
   <div class="stat">
+    <div class="stat-conic"></div>
     <div class="stat-num">100<sup>%</sup></div>
     <div class="stat-label">Digital</div>
   </div>
   <div class="stat">
+    <div class="stat-conic"></div>
     <div class="stat-num">20<sup>+</sup></div>
     <div class="stat-label">Active partners</div>
   </div>
@@ -2139,8 +2211,10 @@ footer::before {
           <div class="about-fact-label">HQ</div>
           <div class="about-fact-value">Stockholm</div>
         </div>
+        <div class="about-fact about-fact--btn">
+          <a href="about.html" class="btn-secondary">About Eir →</a>
+        </div>
       </div>
-      <a href="about.html" class="btn-secondary about-btn">About Eir →</a>
     </div>
   </div>
 </section>
@@ -2286,66 +2360,61 @@ function toggleEcosystem() {
 }
 
 // ═══════════════════════════════════════════════════════
-// SECTION 03 — STATS
-// Numbers always visible. Count-up animates on scroll.
+// SECTION 03 — STATS: materialize → then count
 // ═══════════════════════════════════════════════════════
 (function() {
-  var statsEl = document.querySelector('.stats');
+  const statsEl = document.querySelector('.stats');
   if (!statsEl) return;
-
-  var statNums = Array.prototype.slice.call(statsEl.querySelectorAll('.stat-num'));
-  var statLabels = Array.prototype.slice.call(statsEl.querySelectorAll('.stat-label'));
-
-  var targets = [
-    { el: statNums[0], end: 10,  suffix: '+' },
-    { el: statNums[1], end: 100, suffix: '%' },
-    { el: statNums[2], end: 20,  suffix: '+' },
+  const statItems = statsEl.querySelectorAll('.stat');
+  const targets = [
+    { el: statsEl.querySelectorAll('.stat-num')[0], end: 10,  suffix: '+' },
+    { el: statsEl.querySelectorAll('.stat-num')[1], end: 100, suffix: '%' },
+    { el: statsEl.querySelectorAll('.stat-num')[2], end: 20,  suffix: '+' }
   ];
-
-  function resetNums() {
-    targets.forEach(function(t) {
-      t.el.innerHTML = '0<sup>' + t.suffix + '</sup>';
-    });
-  }
-
-  var counted = false;
-
+  targets.forEach(({ el, suffix }) => {
+    if (el) el.innerHTML = '0<sup>' + suffix + '</sup>';
+  });
+  // Animate individual .stat items — NOT the parent .stats container
+  statItems.forEach((item) => {
+    item.style.opacity   = '0';
+    item.style.transform = 'translateY(18px)';
+    item.style.filter    = 'blur(6px)';
+    item.style.transition =
+      'opacity 0.7s cubic-bezier(0.16,1,0.3,1), ' +
+      'transform 0.7s cubic-bezier(0.16,1,0.3,1), ' +
+      'filter 0.7s cubic-bezier(0.16,1,0.3,1)';
+  });
+  let counted = false;
   function runCounters() {
     if (counted) return;
     counted = true;
-    var duration = 1400;
-    var startTime = performance.now();
+    const duration = 1600;
+    const start = performance.now();
     function tick(now) {
-      var raw = Math.min((now - startTime) / duration, 1);
-      var ease = 1 - Math.pow(1 - raw, 3);
-      targets.forEach(function(t) {
-        t.el.innerHTML = Math.round(ease * t.end) + '<sup>' + t.suffix + '</sup>';
+      const raw = Math.min((now - start) / duration, 1);
+      const t = 1 - Math.pow(1 - raw, 3);
+      targets.forEach(({ el, end, suffix }) => {
+        if (el) el.innerHTML = Math.round(t * end) + '<sup>' + suffix + '</sup>';
       });
       if (raw < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
-
-  // No fade animation — stats always visible and sharp.
-  // Only count-up animates on scroll.
-  resetNums();
-
-  // Show final numbers immediately (always visible, no animation dependency)
-  targets.forEach(function(t) {
-    t.el.innerHTML = t.end + '<sup>' + t.suffix + '</sup>';
-  });
-
-  // Count-up replays when section enters viewport
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        resetNums();
-        counted = false;
-        setTimeout(runCounters, 150);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
+        statItems.forEach((item, i) => {
+          setTimeout(() => {
+            item.style.opacity   = '1';
+            item.style.transform = 'translateY(0)';
+            item.style.filter    = 'blur(0)';
+          }, i * 90);
+        });
+        setTimeout(runCounters, 500);
+        observer.unobserve(statsEl);
       }
     });
-  }, { threshold: 0 });
-
+  }, { threshold: [0, 0.25, 0.5] });
   observer.observe(statsEl);
 })();
 
