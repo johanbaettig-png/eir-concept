@@ -238,7 +238,7 @@ nav.nav-scrolled { background: rgba(14,26,18,0.92); backdrop-filter: blur(12px);
 .btn-secondary:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
 .hero-scroll {
   position: absolute;
-  bottom: 2.2rem;
+  bottom: 5.5rem;
   left: clamp(1.25rem, 5vw, 3rem);
   z-index: 2;
   display: flex;
@@ -815,6 +815,9 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   max-width: 2rem;
   transition: width 0.7s cubic-bezier(0.16,1,0.3,1);
 }
+.how-step-item[data-step="0"] .how-step-line {
+  display: none;
+}
 
 .how-step-content {
   opacity: 0;
@@ -1200,18 +1203,31 @@ section { padding: clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,3rem); }
   overflow: hidden;
   text-align: center;
   padding: clamp(8rem,14vw,14rem) clamp(1.25rem,5vw,3rem);
+  background: #0A1410;
 }
 .cta-section::before {
   content: '';
   position: absolute;
   inset: -80%;
-  background: conic-gradient(from 0deg at 38% 55%,
-    #162614 0deg, #2E4D2A 40deg, #5C7A5E 85deg,
-    #3A5C3A 125deg, #0A1410 175deg, #1A2E1A 215deg,
-    #d86b32 250deg, #2A3A28 280deg, #4A6E48 318deg, #162614 360deg);
+  background: conic-gradient(from 0deg at 38% 55%,#162614 0deg,#2E4D2A 40deg,#5C7A5E 85deg,#3A5C3A 125deg,#0A1410 175deg,#1A2E1A 215deg,#E8631A 250deg,#2A3A28 280deg,#4A6E48 318deg,#162614 360deg);
   filter: blur(52px);
-  animation: heroCW 18s linear infinite;
-  opacity: 0.9;
+  animation: heroCW 32s linear infinite;
+  opacity: 0.72;
+  will-change: transform;
+  z-index: 0;
+  pointer-events: none;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  inset: -80%;
+  background: conic-gradient(from 180deg at 62% 40%,#0A1410 0deg,#E8631A 28deg,#2E3D2F 70deg,#4A6E4A 115deg,#0A1410 165deg,#5C7A5E 205deg,#1A2A1A 252deg,#3A5030 298deg,#0A1410 360deg);
+  filter: blur(68px);
+  animation: heroCCW 24s linear infinite;
+  opacity: 0.6;
+  will-change: transform;
+  z-index: 0;
+  pointer-events: none;
 }
 .cta-section::after {
   content: '';
@@ -2636,13 +2652,13 @@ function toggleEcosystem() {
 
   const P = {
     hdrStart: 0.00, hdrEnd: 0.10,
-    s0Start:  0.08, s0End:  0.20,
-    s1Start:  0.22, s1End:  0.34,
-    s2Start:  0.34, s2End:  0.46,
-    allDone:  0.50,
-    s0Active: [0.20, 0.30],
-    s1Active: [0.32, 0.44],
-    s2Active: [0.46, 0.50],
+    s0Start:  0.22, s0End:  0.34,
+    s1Start:  0.36, s1End:  0.46,
+    s2Start:  0.48, s2End:  0.58,
+    allDone:  0.62,
+    s0Active: [0.34, 0.44],
+    s1Active: [0.46, 0.56],
+    s2Active: [0.58, 0.62],
   };
 
   function update() {
